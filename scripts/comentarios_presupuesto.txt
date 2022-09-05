@@ -1,0 +1,107 @@
+/*
+    Curso de JS - CoderHouse.
+    Autor: Federico Walter Dalinger
+*/
+
+/*Presupuesto para camion*/
+
+//! --------------------------COMENTARIOS DE CADA VERSION / ENTREGA--------------------------
+
+
+// * 01 - Desafío Complementario N°1 - Crear un algoritmo utilizando un ciclo:
+/* 
+   * 1- Se Incorporan los ciclos para generar los presupuestos segun la cantidad seteada inicialmente.
+   * 2- Estos ciclos son los FOR y WHILE (ademas de los condicionales).
+*/
+
+// * 02 - Desafío Entregable N°1 - Simulador Interactivo:
+/* 
+   * 1- Se setean todas las variables que intervienen en el calculo del presupuesto.
+   * 2- Se pide mediante "prompt" que el usuario defina la cantidad de presupuestos a realizar.
+   * 3- Se pide luego los datos para generar tales presupuestos.
+   * 4- Se muestra en pantalla por "alert" los presupuestos generados (siempre y cuando el usuario cargue bien los valores correspondientes).
+   * 5- El error producto de datos mal cargados es solucionado en futuras versiones.
+*/
+
+// * 03 - Desafío Complementario N°2 - Incorporar Arrays:
+/* 
+   * 1- Se genera el "array_presupuestos" en donde coloco ordenadamente todos los presupuestos a analizar.
+   * 2- Se coloca "return" en "presupuesto_por_hora", "presupuesto_por_km", "indica_presupuesto", para hacer uso de esas variables a futuro.
+   * 3- En la función "calcula_presupuestos" se "pushea" lo referido a cada presupuesto, completando así el "array_presupuestos."
+   * 4- Se crea la funcón "ordenar_presupuesto" la cual va a "pushear" cada presupuesto en "presupuestos_ordenados", en un solo string, por indice.
+   * 5- Se ejecuta "ordenar_presupuesto" y se muestra el array de "presupuestos_ordenados" con "alert".
+*/
+
+// * 04 - PRE ENTREGA FINAL N°1:
+/* 
+   * 1- Se agregan funciones y sus variables respectivas para comprobar que cada promp sea solo texto, numero o que incluya caracteristicas de e-mail ("@" y ".com").
+   * 2- Se permite ingresar "N/A" para saltear y no cargar ningun nombre, telefono, o mail de contacto.
+   * 3- A medida que se genera un nuevo presupuesto, no se muestra de forma individual como en la versión previa. Solo se muestra el "array_presupuestos" al final de todo el ciclo global.
+   * 4- Se agrega la clave "persona" (es un objeto que posee nombre, telefono y mail), en cada uno de los objetos que conforma el "array_presupuesto".
+*/
+
+// * 05 - Desafío Complementario N°3 - Interactuar con HTML:
+/* 
+   * 1- En "presupuesto.html" se coloca el tag "script" antes de cerrar el tag "body".
+   * 2- Preparación de "presupuesto.html" con inputs para eventos (siguiente desafío entregable).
+   * 3- Se agregan la función "mostrar_alerta_presupuestos_en_dom", que interactúa con el HTML si hay carga de presupuestos o no.
+   * 4- Cambio menores en html: Se genera el tag "footer" por fuera del tag "main", para que la interacción del DOM se vea por encima del "footer" (y no debajo de la página).
+*/
+
+// * 06 - Desafío Entregable N°2 - Incorporar eventos:
+/* 
+   * 1- Se usan los inputs del presupuesto.html para incluirlos dentro del presupuesto, como variables del DOM.
+   * 2- Luego de apretar el boton "presupuestar" se van mostrando los presupuestos calculados en el DOM.
+*/
+
+// * 07 - PRE ENTREGA FINAL N°2:
+/* 
+   * 0- Se separan en varios .js las variables, las funciones, y los comentarios. 
+   * 1- Se efectuan cambios visuales en el presupuesto.html y presupuesto.css.
+   * 2- Se crean dos funciones para verificar numero, texto "puro".
+   * 3- Se replantean las funciones para ingreso de datos:
+   *    Primero se toma info del DOM, y se verifica si es nombre, telefono o mail. 
+   *    En caso de haber ingresado bien los datos (caracteristicas de nombre, mail y numeros acordes) se genera un presupuesto.
+   *    En caso de NO haber ingresado bien los datos, se muestra una alarma en el DOM al lado del input mal cargado. 
+   * 3- A medida que se van generando los presupuestos, se van cargando en una lista (siempre y cuando no tengan errores en inputs).
+   *    Estos ultimos, se van cargando en el LocalStorage a medida que se oprime sobre presupuestar.
+   * 4- Tales presupuestos se van a ir presentando, uno debajo del otro en el "textarea".
+   *    El primer presupuesto elimina el "textarea" que se encuentra al cargar la pagina (situado por defecto en el presupuesto.html).
+   * 5- En caso de haber almacenado informacion (presupuestos) en el LocalStorage, si se vuelve a ingresar a presupuesto.html:
+   *    Se solicita al usuario si desea verlo (incluso puede seguir la numeracion con presupuestos nuevos) o borrarlo e iniciar de nuevo.
+*/
+
+// * 08 - Desafío Complementario N°4 - Optimizando el Proyecto Final:
+/*  
+   * 1- Uso operadores ternarios en "verifica_texto_ingresado_es_texto()", "verifica_numero_ingresado_es_numero()", "verifica_mail_ingresado_es_mail()"
+   * 2- Uso operador lógico "AND" en "verifica_texto_ingresado_es_texto()", "verifica_numero_ingresado_es_numero()"
+   * 3- No vi conveniente el usar "desestructuracion" por el tipo de array de objetos, que se va a ir generando a medida que calcule nuevo presupuesto.
+   * 4- Como no creo un objeto, o no le agrego un objeto a mi array de objetos, no vi la necesidad de usar "spread".
+*/
+
+// * 09 - Desafío Entregable N°3 - Incorporando Librerías:
+/*  
+   * 1- Incorporo la libreria LUXON al proyecto. Lo hago para tener un registro del momento en el cual se hizo cada presupuesto.
+   * 2- Genero funcion "genera_fecha_presupuesto ()" y la incluyo en "genera_presupuesto_individual()".
+   * 3- Luego, creo la clave "fecha_presup" con su fecha en "string", para incluirse dentro de "array_presupuestos".
+   * 4- Finalmente, en la funcion "ordenar_presupuestos()" se incluye la fecha, en string, por cada "indice" de la lista generada.
+*/
+
+// * 09 - Desafío Entregable N°4 - Incorporando API / FETCH:
+/*  
+   * 1- Consumo la API "emailJS" y la incluyo en el proyecto. Lo hago para tener un registro en los mails.
+   * 2- Genero funcion "pide_cc_to_mail()", "emite_o_no_error_cc_to_mail()".
+   * 3- Modifico la funcion "verifica_mail_ingresado_es_mail()" ya que pueden haber dominios distintos a ".com" (como ".edu" por ejemplo).
+   * 4- Finalmente, en la funcion "ordenar_presupuestos()" se incluye la fecha, en string, por cada "indice" de la lista generada.
+   * 5- Modifico "ordenar_presupuestos()" y "verifica_localstorage()".
+   * 6- Agrego "parsear_html()" y "deparsear_html()". Sirven para enviar al mail con un formato más agradable.
+   * 7- Agrego "oculta_inputs_datos()", "muetra_inputs_datos()", "oculta_cc_to_mail()" y "muestra_cc_to_mail()".
+   * 8- Agrego nuevo boton (id="button") que envia el listado de presupuestos al mail determinado "Enviar a (email)".
+   * 9- Agrego las funciones de interación con DOM y la API "emailJS".
+*/
+
+//! --------------------------MEJORAS PARA FUTURAS VERSIONES--------------------------
+
+
+// TODO: se puede implementar una API que solo determine distancias segun direcciones???? Estaria ideal incluirlo con maps.
+// TODO: crear app con rastreo de celular para notificar por "ID" y conocer por donde anda el camion/furgon 
